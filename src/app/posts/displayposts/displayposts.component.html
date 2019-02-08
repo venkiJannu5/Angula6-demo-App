@@ -1,0 +1,36 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>MyPosts</span>
+
+    <span class="example-spacer"></span>
+    
+    <button mat-button>About</button>
+    <button mat-button>Create Post</button>
+    <button mat-button>Contact</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-card>
+  <mat-form-field>
+    <input matInput [(ngModel)]="answer" placeholder="Write your Post">
+  </mat-form-field>
+
+  <br>
+  
+  <button mat-raised-button (click)="CreatePost()">Add Post</button>
+  <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+</mat-card>
+<mat-card *ngIf="answerDisplay">
+  <h1>{{ answerDisplay }}, you're damn right.</h1>
+</mat-card>
+
+<mat-card *ngFor="let item of postsData" >
+  <h1>{{item.post}}</h1>
+  <mat-grid-list cols="2" rowHeight="15:3">
+    <mat-grid-tile><button class="example facebook" (click)="upvote(item._id)">LIKE</button>
+      {{item.voteCount}} Likes
+    </mat-grid-tile>
+    <mat-grid-tile>PostedDate:{{item.createdDate | date:'short'}}</mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
+
